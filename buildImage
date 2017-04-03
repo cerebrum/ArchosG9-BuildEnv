@@ -30,6 +30,9 @@ function inject
 
 function buildImage
 {
+echo "Checking ext4 image..."
+fsck.ext4 -p $DESTINATION_PATH/archos.ext4.update
+
 echo "Mounting base image..."
 sudo mount $DESTINATION_PATH/archos.ext4.update $DESTINATION_PATH/mount/
 
@@ -87,9 +90,10 @@ echo "adb push $DESTINATION_PATH/archos.ext4.update /data/media/ && adb reboot"
 
 function makeProject
 {
-export USE_LINARO_COMPILER_FLAGS=yes
-export ANDROID_EABI_TOOLCHAIN_DIR=linaro-4.8
-export ARM_EABI_TOOLCHAIN_DIR=linaro-4.8
+export TARGET_GCC_VERSION_EXP=4.9
+#export USE_LINARO_COMPILER_FLAGS=yes
+#export ANDROID_EABI_TOOLCHAIN_DIR=linaro-4.8
+#export ARM_EABI_TOOLCHAIN_DIR=linaro-4.8
 
     echo "$CYANOGEN_BASE_PATH: Rebuilding bionic headers, based from external/kernel-headers package"
     cd $CYANOGEN_BASE_PATH
@@ -108,7 +112,7 @@ export ARM_EABI_TOOLCHAIN_DIR=linaro-4.8
 
     echo "Now building the project..."
     #. build/envsetup.sh && lunch cm_archos_g9-userdebug && mka update-api && mka ${@:2}
-    . build/envsetup.sh && lunch cm_archos_g9-userdebug && mka ${@:2}
+    . build/envsetup.sh && lunch cm_archos_g9-userdebug && cmka ${@:2}
     cd $BUILD_PWD
 }
 
@@ -134,7 +138,7 @@ function prepareLinaroToolChain
 
 function applyCherryPicks
 {
-    set +e
+    set -e
     echo "Performing cherry-picks..."
 
      # Update ccache to aosp version 3.1 which is faaast
@@ -161,7 +165,7 @@ function applyCherryPicks
 
      # SUPL early data connection fix
      #http://review.cyanogenmod.org/#/c/57621/
-     cd $CYANOGEN_BASE_PATH/frameworks/base
+     #cd $CYANOGEN_BASE_PATH/frameworks/base
      #git fetch http://review.cyanogenmod.org/CyanogenMod/android_frameworks_base refs/changes/21/57621/4 && git cherry-pick FETCH_HEAD
      
      cd $CYANOGEN_BASE_PATH/hardware/ril    
@@ -195,22 +199,22 @@ function applyCherryPicks
      cd $CYANOGEN_BASE_PATH/frameworks/base
      #git fetch http://review.cyanogenmod.org/CyanogenMod/android_frameworks_base refs/changes/14/66314/1 && git cherry-pick FETCH_HEAD
 
-     set -e
+     #set -e
      # GCC - Optimizations
-     cd $CYANOGEN_BASE_PATH/build
+     #cd $CYANOGEN_BASE_PATH/build
      # 
-     git remote remove JustArchi_Build; git remote add JustArchi_Build https://github.com/JustArchi/android_build.git && git fetch JustArchi_Build && \
-     git cherry-pick --strategy=recursive -Xours 0cf89401cc8092dda959b5746ec4899fda756cec && \
-     git cherry-pick bb1d7f11ef866d829c7966a036a4b3a7d7519595
+     #git remote remove JustArchi_Build; git remote add JustArchi_Build https://github.com/JustArchi/android_build.git && git fetch JustArchi_Build && \
+     #git cherry-pick --strategy=recursive -Xours 0cf89401cc8092dda959b5746ec4899fda756cec && \
+     #git cherry-pick bb1d7f11ef866d829c7966a036a4b3a7d7519595
   
      cd $CYANOGEN_BASE_PATH/frameworks/av 
      git remote remove temasek; git remote add temasek https://github.com/temasek/android_frameworks_av.git && git fetch temasek && git cherry-pick 31943d4724f0fb79235eae131f8d02ff6e97ddce
 
      # Bash fix for "undefined reference to 'wctomb'"
-     cd $CYANOGEN_BASE_PATH/external/bash
-     git remote remove DJL10-2_BASH; git remote add DJL10-2_BASH https://github.com/Quallenauge/android_external_bash.git && git fetch DJL10-2_BASH && \
-     git cherry-pick f6dd843d502e7227ed80d53ba0625bb9e75bdaff && \
-     git cherry-pick d8e8146df5639f0ddc7c24d4a33923718b1966f7
+     #cd $CYANOGEN_BASE_PATH/external/bash
+     #git remote remove DJL10-2_BASH; git remote add DJL10-2_BASH https://github.com/Quallenauge/android_external_bash.git && git fetch DJL10-2_BASH && \
+     #git cherry-pick f6dd843d502e7227ed80d53ba0625bb9e75bdaff && \
+     #git cherry-pick d8e8146df5639f0ddc7c24d4a33923718b1966f7
 
 
      #git remote remove DJL10-2_BASH; git remote add DJL10-2_BASH https://github.com/DJL10-2/android_external_bash.git && git fetch DJL10-2_BASH && \
@@ -218,10 +222,9 @@ function applyCherryPicks
      #git cherry-pick d8e8146df5639f0ddc7c24d4a33923718b1966f7
 
      # Art fix
-     cd $CYANOGEN_BASE_PATH/art
-     git remote remove JustArchi_ART; git remote add JustArchi_ART https://github.com/JustArchi/android_art.git && git fetch JustArchi_ART && \
-     git cherry-pick 8354d2dc9d260ca67dbdf32e123bd4da62b8a68d
-
+     #cd $CYANOGEN_BASE_PATH/art
+     #git remote remove JustArchi_ART; git remote add JustArchi_ART https://github.com/JustArchi/android_art.git && git fetch JustArchi_ART && \
+     #git cherry-pick 8354d2dc9d260ca67dbdf32e123bd4da62b8a68d
 }
 
 case "$1" in
