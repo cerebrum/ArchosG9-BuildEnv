@@ -112,9 +112,9 @@
     <remove-project name="platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.7"/>
     <remove-project name="platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.6"/>
     <remove-project name="platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.7"/>
-    <project path="prebuilts/gcc/linux-x86/arm/arm-eabi-4.8" name="platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8"  clone-depth="1" remote="aosp" revision="refs/tags/android-7.1.1_r6" />
+    <project path="prebuilts/gcc/linux-x86/arm/arm-eabi-4.8" name="platform/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8"  clone-depth="1" remote="aosp" revision="refs/tags/android-7.1.2_r6" />
     <!-- <project path="prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9" name="CyanogenMod/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9" clone-depth="1" remote="github" /> -->
-    <project path="prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9" name="platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9" clone-depth="1" remote="aosp" revision="refs/tags/android-7.1.1_r6" />
+    <project path="prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9" name="platform/prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.9" clone-depth="1" remote="aosp" revision="refs/tags/android-7.1.2_r6" />
 	<!--<project name="temasek/sm-arm-eabi-4.8" path="prebuilts/gcc/linux-x86/arm/arm-eabi-4.8" remote="bitbucket" revision="master" />
 	<project name="temasek/sm-arm-androideabi-4.8" path="prebuilts/gcc/linux-x86/arm/arm-linux-androideabi-4.8" remote="bitbucket" revision="master" />
     -->
